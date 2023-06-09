@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+	TODO: Task 1, Task 2, Task 3
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login</title>
+	</head>
+	<body>
+
+		<h2>Please Login</h2>
+		<form method="post" th:action="@{/login}" th:object="${user}">
+			<table>
+				<tr>
+					<td> 
+						<label for="username">Username:</label> 
+					</td>
+					<td>
+						<p style="color:red" th:errors="*{username}"> </p>
+						<input type="text" id="username" size="30" 
+								placeholder="Please type in your username" th:field="*{username}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password">Password:</label>
+					</td>
+					<td>
+						<p style="color:red" th:errors="*{password}"> </p>
+						<input type="password" id="password" size="30" 
+								placeholder="Please type in your password" th:field="*{password}">
+					</td>
+				</tr>
+				<tr th:if="*{failedAttempts} > 0">
+					<td>
+						<p th:text="'What is ' + ${captcha.num1} + ${captcha.operand} + ${captcha.num2} + '?'"></p>
+					</td>
+					<td>
+						<label for="answer">Answer:</label>
+					</td>
+					<td>
+						<input type="text" id="answer" placeholder="Please enter captcha result" th:field="*{answer}">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button>Login</button>
+					</td>
+				</tr>
+			</table>
+		</form>		
+	</body>
+</html>
